@@ -1,5 +1,5 @@
 # UNI-EM_annotator
-UNI-EM annotator のページ。開発用。しばらく日本語のみで提供。
+UNI-EM annotator のページ。開発用。しばらく日本語のみ。中途半端な形で、世界に公開してしまうと不都合という理由もある。
 
 # 起動方法
 Windows版の場合、

@@ -54,8 +54,9 @@ async def update_paint_volumes(sid):
   		data_row['mean_radius'] = attributes[id]['mean_radius']
   		data_row['min_radius']  = attributes[id]['min_radius']
   		data_row['volume']      = attributes[id]['volume']
-  data["sid"] = 0
 
+#  data["sid"] = 0
+  data["sid"] = sid
   write_file(room_id, data)
   await sio.emit('update', data, room=room_id)
 

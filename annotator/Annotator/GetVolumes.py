@@ -65,8 +65,12 @@ class GetVolumes:
 					attributes[id]['area']   += area
 				else:
 					attributes[id] = {}
-					attributes[id]['volume'] = closed_mesh.volume
-					attributes[id]['area']   = area
+					attributes[id]['volume']      = closed_mesh.volume
+					attributes[id]['area']        = area
+					attributes[id]['length']      = 0
+					attributes[id]['min_radius']  = 0
+					attributes[id]['max_radius']  = 0
+					attributes[id]['mean_radius'] = 0
 
 				# If skeleton exists:
 				if skel != {}:
@@ -79,22 +83,19 @@ class GetVolumes:
 					text_vtk2 = "Length (um) : {0:.4f}\nMin r (um) : {1:.4f}\nMax r (um) : {2:.4f}\nMean r (um) : {3:.4f}".format(len_enclosed, min_radius, max_radius, mean_radius)
 					text_vtk = text_vtk + text_vtk2
 
-				# Save values
-				if 'length' in attributes[id].keys():
+					# Save values
 					attributes[id]['length']      += len_enclosed
-					attributes[id]['min_radius']  = min( [ attributes[id]['min_radius'], min_radius ] )
 					attributes[id]['max_radius']  = max( [ attributes[id]['max_radius'], max_radius ] )
 					attributes[id]['mean_radius'] = mean_radius
-				else:
-					attributes[id]['length']      = len_enclosed
-					attributes[id]['min_radius']  = min_radius
-					attributes[id]['max_radius']  = max_radius
-					attributes[id]['mean_radius'] = mean_radius
+					if attributes[id]['min_radius'] <= 0:
+						attributes[id]['min_radius']  = min_radius
+					else:
+						attributes[id]['min_radius']  = min( [ attributes[id]['min_radius'], min_radius ] )
 
-					plotter = pv.Plotter()
-					plotter.add_mesh(closed_mesh_for_vtk, label='mesh')
-					plotter.add_text(text_vtk)
-					plotter.show()
+				plotter = pv.Plotter()
+				plotter.add_mesh(closed_mesh_for_vtk, label='mesh')
+				plotter.add_text(text_vtk)
+				plotter.show()
 
 			return attributes
 

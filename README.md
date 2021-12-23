@@ -22,7 +22,7 @@ Windows版の場合、
     3. サーバ側で（Pythonを用いて）計算した体積・セグメント長などの情報を（ペイントオブジェクトの隠し属性として）共有・保存・出力。
         - 一応動作するが、"Calc Volumes"をクリックして表面積、体積などを計算した後、値がすぐにTabulator表／CSVファイルに反映されない。別の操作に同期して反映されるように見える。
         - _web_annotator\js\SyncPaint.js のL86より annotator\Annotator\sio.py のL35"update_paint_volumes"を呼び出している。これには成功していて、'area_reserv', 'length', ..., 'volume' の値をすぐに計算している。
-        - その後、 data["sid"] = 0 としてsocket.idを意図的に未アップデートにして、await sio.emit('update')を実行して、Webアプリの表を更新しようとしている。ここがおかしい様だ。
+        - その後、 data["sid"] = 0 としてsocket.idを意図的に未アップデートにして、await sio.emit('update')を実行して、Webアプリの表を更新しようとしている。ここがおかしい？
 
 1. View modeにおいて表面オブジェクトの>ペイント部分をクリックした場合にペイントIDが表示されるようにしたい。
     - 成功

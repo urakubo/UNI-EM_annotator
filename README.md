@@ -12,7 +12,8 @@ Windows版の場合、
 として起動。ChromeのURL欄に
   - http://localhost:3000/index.html
   
-等と入力してWebアプリの起動を確認する。
+等と入力してWebアプリの起動を確認する。サンプルデータは次のDropboxフォルダ：
+  - https://www.dropbox.com/s/sv2legt451nzxvf/annot_ball.zip?dl=0
 
 # 課題
 

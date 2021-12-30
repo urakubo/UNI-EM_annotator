@@ -7,7 +7,7 @@ Windows版の場合、
   - pip install -r requirements-win.txt
 
 で必要moduleをインストールできる。
-  - python runServer [annotator folder]
+  - python runServer.py [annotator folder]
 
 として起動。ChromeのURL欄に
   - http://localhost:3000/index.html

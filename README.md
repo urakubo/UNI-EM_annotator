@@ -14,6 +14,7 @@ Windows版の場合、
   
 等と入力してWebアプリの起動を確認する。サンプルデータは次のDropboxフォルダ：
   - https://www.dropbox.com/s/sv2legt451nzxvf/annot_ball.zip?dl=0
+  - https://www.dropbox.com/s/kx1o6xlj25jyf46/annot_origin_dend05.zip?dl=0
 
 # 課題
 

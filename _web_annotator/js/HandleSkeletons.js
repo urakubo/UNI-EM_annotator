@@ -66,9 +66,9 @@ APP.generateSkeletons = function() {
 		var name = 'line' + ( '0000000000' + id ).slice( -10 );
 		var obj = APP.scene.getObjectByName(name);
 		if ( obj != undefined ) {
-			//obj.geometry.dispose();
-			//obj.material.dispose();
     		APP.scene.remove(obj);
+			obj.geometry.dispose();
+			obj.material.dispose();
     		APP.disposeNode(obj);
 		}
 		// Get marker points
@@ -242,7 +242,8 @@ APP.removeSkeletonObject = function(id) {
 	var obj = APP.scene.getObjectByName(name);
 	if ( obj != undefined ) {
 		// APP.scene.remove(obj);
-		obj.visible = false;
+		// obj.visible = false;
+		APP.scene.remove( obj );
 		}
 	}
 

@@ -10,8 +10,7 @@ import { SurfaceTable } from "./SurfaceTable";
 
 // Change the opacity of all surface objects
 
-APP.addSpheres = function() {
-	
+APP.showDisks = function() {
 	var rows = SurfaceTable.searchRows("act", "=",  true);
 	for (var i in rows) {
 		var id  = rows[i].getData().id;
@@ -19,14 +18,14 @@ APP.addSpheres = function() {
   		var g   = rows[i].getData().g;
   		var b   = rows[i].getData().b;
   		var col = r*256*256+g*256+b*1;
-  		APP.addSphereObject(id, col);
+  		APP.addDiskObject(id, col);
   	}
 
 }
 
-APP.removeSpheres = function() {
+APP.hideDisks = function() {
 	APP.scene.traverse(function(obj) {
-		if ( obj.name.match(/Spheres/) ) {
+		if ( obj.name.match(/Disks/) ) {
 			obj.visible = false;
 		}
 	});
@@ -34,24 +33,21 @@ APP.removeSpheres = function() {
 
 
 // Add stl objects and a name
-APP.addSphereObject = function(id, col) {
+APP.addDiskObject = function(id, col) {
 
-	if (APP.SphereMode == 0){
-		return false;
-		}
-
-	const target_url = location.protocol+"//"+location.host+"/skeleton/whole/" + ( '0000000000' + id ).slice( -10 ) + ".hdf5";
-	const filename   = ( '0000000000' + id ).slice( -10 ) + ".hdf5";
-	const name       = 'Spheres' + ( '0000000000' + id ).slice( -10 );
-	
+	APP.deleteDiskObject(id)
 	// Revive if it already exists.
-	// console.log('Name: ', name)
+	/*
 	var obj = APP.scene.getObjectByName(name);
 	if ( obj != undefined ) {
-		// console.log('Obj: ', obj)
 		obj.visible = true;
 		return true;
 		}
+	*/
+
+	const target_url = location.protocol+"//"+location.host+"/skeleton/whole/" + ( '0000000000' + id ).slice( -10 ) + ".hdf5";
+	const filename   = ( '0000000000' + id ).slice( -10 ) + ".hdf5";
+	const name       = 'Disks' + ( '0000000000' + id ).slice( -10 );
 	
 	//
 	fetch(target_url)
@@ -97,7 +93,7 @@ APP.addSphereObject = function(id, col) {
 		});
 		
 		
-		var spheres = new THREE.Group();
+		var disks = new THREE.Group();
 		for(var i=0;i< data_edges.length;i++){
 			i1 = data_edges[i][0];
 			i2 = data_edges[i][1];
@@ -137,15 +133,15 @@ APP.addSphereObject = function(id, col) {
 
 
 				//vertice_r.quaternion.multiply( q );
-				spheres.add( vertice_r )
+				disks.add( vertice_r )
 
 				}
 			}
 		var line = new THREE.LineSegments( geometry, material );
-		spheres.add( line )
+		disks.add( line )
 
-		spheres.name = name;
-		APP.scene.add( spheres );
+		disks.name = name;
+		APP.scene.add( disks );
 	    //
 	    //
 	  });
@@ -153,8 +149,8 @@ APP.addSphereObject = function(id, col) {
 
 
 // Change the color of a skeleton object specified by a name.
-APP.changeSphereObjectColor = function(id, col) {
-	name = 'Spheres' + ( '0000000000' + id ).slice( -10 );
+APP.changeDiskObjectColor = function(id, col) {
+	name = 'Disks' + ( '0000000000' + id ).slice( -10 );
 	var obj = APP.scene.getObjectByName(name);
 	if ( obj != undefined ) {
 		obj.material.color.setHex( col );
@@ -163,12 +159,23 @@ APP.changeSphereObjectColor = function(id, col) {
 
 
 // Remove a stl object by the name.
-APP.removeSphereObject = function(id) {
-	name = 'Spheres' + ( '0000000000' + id ).slice( -10 );
+APP.hideDiskObject = function(id) {
+	name = 'Disks' + ( '0000000000' + id ).slice( -10 );
 	var obj = APP.scene.getObjectByName(name);
 	if ( obj != undefined ) {
 		// APP.scene.remove(obj);
 		obj.visible = false;
+		}
+	}
+
+APP.deleteDiskObject = function(id) {
+	name = 'Disks' + ( '0000000000' + id ).slice( -10 );
+	var obj = APP.scene.getObjectByName(name);
+	if ( obj != undefined ) {
+    		APP.scene.remove(obj);
+			obj.geometry.dispose();
+			obj.material.dispose();
+    		APP.disposeNode(obj);
 		}
 	}
 

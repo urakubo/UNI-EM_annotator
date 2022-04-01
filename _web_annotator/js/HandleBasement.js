@@ -293,7 +293,7 @@ export function launchAnnotator() {
 	APP.SkeletonMode = 0;
 
 	// Sphere
-	APP.SphereMode   = 0;
+	APP.DiskMode   = 0;
 
 	//Boundingbox
 	const call_url   = location.protocol+"//"+location.host+"/surface/VolumeDescription.json";

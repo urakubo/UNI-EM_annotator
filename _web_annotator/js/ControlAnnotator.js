@@ -27,56 +27,56 @@ window.ChangeMode = function (mode) {
 //			console.log("view")
 			APP.MarkerMode   = 0;
 			APP.SkeletonMode = 0;
-			APP.SphereMode   = 0;
+			APP.DiskMode   = 0;
 			APP.cursor.visible = false;
 			switchAnnotation(0);
 			APP.changeSurfaceObjectOpacity(-1);
 			APP.removeSkeletons();
-			APP.removeSpheres();
+			APP.hideDisks();
 			break;
 		case "point":
 //			console.log("point")
 			APP.MarkerMode   = 1;
 			APP.SkeletonMode = 0;
-			APP.SphereMode   = 0;
+			APP.DiskMode   = 0;
 			APP.cursor.visible = false;
 			switchAnnotation(0);
 			APP.changeSurfaceObjectOpacity(-1);
 			APP.removeSkeletons();
-			APP.removeSpheres();
+			APP.hideDisks();
 			break;
 		case "paint":
 //			console.log("paint")
 			APP.MarkerMode   = 0;
 			APP.SkeletonMode = 0;
-			APP.SphereMode   = 0;
+			APP.DiskMode   = 0;
 			APP.cursor.visible = true;
 			switchAnnotation(1);
 			APP.changeSurfaceObjectOpacity(-1);
 			APP.removeSkeletons();
-			APP.removeSpheres();
+			APP.hideDisks();
 			break;
 		case "skeleton":
 //			console.log("skeleton")
 			APP.MarkerMode   = 0;
 			APP.SkeletonMode = 1;
-			APP.SphereMode   = 0;
+			APP.DiskMode   = 0;
 			APP.cursor.visible = false;
 			switchAnnotation(0);
 			APP.changeSurfaceObjectOpacity(0);
 			APP.addSkeletons();
-			APP.removeSpheres();
+			APP.hideDisks();
 			break;
 		case "sphere":
 //			console.log("shpere")
 			APP.MarkerMode   = 0;
 			APP.SkeletonMode = 0;
-			APP.SphereMode   = 1;
+			APP.DiskMode   = 1;
 			APP.cursor.visible = false;
 			switchAnnotation(0);
 			APP.changeSurfaceObjectOpacity(-2);
-			APP.removeSkeletons();
-			APP.addSpheres();
+			APP.addSkeletons();
+			APP.showDisks();
 			break;		
 		default:
     		console.log(`Error. Mode ${mode} cannot be interpreted.`);

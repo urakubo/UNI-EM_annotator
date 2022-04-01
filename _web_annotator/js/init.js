@@ -5,7 +5,7 @@ import "../js/util";
 import "../js/SurfaceTable";
 import "../js/HandleSurfaces";
 import "../js/HandleSkeletons";
-import "../js/HandleSpheres";
+import "../js/HandleDisks";
 import "../js/HandleMarkers";
 import "../js/SyncPaint";
 

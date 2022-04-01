@@ -121,7 +121,8 @@ class GenerateSkeleton:
 	##
     mesh = self._load_surface_mesh(id)
     new_radiuses	 = _get_radius_ray(new_vertices, new_tangents, mesh)
-    print('new_radiuses: ', new_radiuses.shape)
+    print('new_radiuses.shape: ', new_radiuses.shape)
+    print('new_radiuses      : ', new_radiuses)
 
 	##
 	## Save skeleton

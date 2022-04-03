@@ -54,7 +54,7 @@ window.ChangeMode = function (mode) {
       switchAnnotation(0);
       _APP__WEBPACK_IMPORTED_MODULE_0__["APP"].changeSurfaceObjectOpacity(-1);
       _APP__WEBPACK_IMPORTED_MODULE_0__["APP"].removeSkeletons();
-      _APP__WEBPACK_IMPORTED_MODULE_0__["APP"].hideDisks();
+      _APP__WEBPACK_IMPORTED_MODULE_0__["APP"].deleteDisks();
       break;
 
     case "point":
@@ -66,7 +66,7 @@ window.ChangeMode = function (mode) {
       switchAnnotation(0);
       _APP__WEBPACK_IMPORTED_MODULE_0__["APP"].changeSurfaceObjectOpacity(-1);
       _APP__WEBPACK_IMPORTED_MODULE_0__["APP"].removeSkeletons();
-      _APP__WEBPACK_IMPORTED_MODULE_0__["APP"].hideDisks();
+      _APP__WEBPACK_IMPORTED_MODULE_0__["APP"].deleteDisks();
       break;
 
     case "paint":
@@ -78,7 +78,7 @@ window.ChangeMode = function (mode) {
       switchAnnotation(1);
       _APP__WEBPACK_IMPORTED_MODULE_0__["APP"].changeSurfaceObjectOpacity(-1);
       _APP__WEBPACK_IMPORTED_MODULE_0__["APP"].removeSkeletons();
-      _APP__WEBPACK_IMPORTED_MODULE_0__["APP"].hideDisks();
+      _APP__WEBPACK_IMPORTED_MODULE_0__["APP"].deleteDisks();
       break;
 
     case "skeleton":
@@ -90,7 +90,7 @@ window.ChangeMode = function (mode) {
       switchAnnotation(0);
       _APP__WEBPACK_IMPORTED_MODULE_0__["APP"].changeSurfaceObjectOpacity(0);
       _APP__WEBPACK_IMPORTED_MODULE_0__["APP"].addSkeletons();
-      _APP__WEBPACK_IMPORTED_MODULE_0__["APP"].hideDisks();
+      _APP__WEBPACK_IMPORTED_MODULE_0__["APP"].deleteDisks();
       break;
 
     case "sphere":
@@ -633,11 +633,25 @@ _APP__WEBPACK_IMPORTED_MODULE_0__["APP"].hideDisks = function () {
       obj.visible = false;
     }
   });
+};
+
+_APP__WEBPACK_IMPORTED_MODULE_0__["APP"].deleteDisks = function () {
+  _APP__WEBPACK_IMPORTED_MODULE_0__["APP"].scene.traverse(function (obj) {
+    if (obj.name.match(/Disks/)) {
+      if (obj != undefined) {
+        _APP__WEBPACK_IMPORTED_MODULE_0__["APP"].scene.remove(obj);
+        obj.geometry.dispose();
+        obj.material.dispose();
+        _APP__WEBPACK_IMPORTED_MODULE_0__["APP"].disposeNode(obj);
+      }
+    }
+  });
 }; // Add stl objects and a name
 
 
 _APP__WEBPACK_IMPORTED_MODULE_0__["APP"].addDiskObject = function (id, col) {
-  _APP__WEBPACK_IMPORTED_MODULE_0__["APP"].deleteDiskObject(id); // Revive if it already exists.
+  // APP.deleteDiskObject(id)
+  // Revive if it already exists.
 
   /*
   var obj = APP.scene.getObjectByName(name);
@@ -646,7 +660,6 @@ _APP__WEBPACK_IMPORTED_MODULE_0__["APP"].addDiskObject = function (id, col) {
   	return true;
   	}
   */
-
   const target_url = location.protocol + "//" + location.host + "/skeleton/whole/" + ('0000000000' + id).slice(-10) + ".hdf5";
   const filename = ('0000000000' + id).slice(-10) + ".hdf5";
   const name = 'Disks' + ('0000000000' + id).slice(-10); //

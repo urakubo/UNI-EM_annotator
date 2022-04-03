@@ -32,10 +32,24 @@ APP.hideDisks = function() {
 }
 
 
+APP.deleteDisks = function() {
+	APP.scene.traverse(function(obj) {
+		if ( obj.name.match(/Disks/) ) {
+			if ( obj != undefined ) {
+    			APP.scene.remove(obj);
+				obj.geometry.dispose();
+				obj.material.dispose();
+    			APP.disposeNode(obj);
+			}
+		}
+	});
+}
+
+
 // Add stl objects and a name
 APP.addDiskObject = function(id, col) {
 
-	APP.deleteDiskObject(id)
+	// APP.deleteDiskObject(id)
 	// Revive if it already exists.
 	/*
 	var obj = APP.scene.getObjectByName(name);

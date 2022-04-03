@@ -32,7 +32,7 @@ window.ChangeMode = function (mode) {
 			switchAnnotation(0);
 			APP.changeSurfaceObjectOpacity(-1);
 			APP.removeSkeletons();
-			APP.hideDisks();
+			APP.deleteDisks();
 			break;
 		case "point":
 //			console.log("point")
@@ -43,7 +43,7 @@ window.ChangeMode = function (mode) {
 			switchAnnotation(0);
 			APP.changeSurfaceObjectOpacity(-1);
 			APP.removeSkeletons();
-			APP.hideDisks();
+			APP.deleteDisks();
 			break;
 		case "paint":
 //			console.log("paint")
@@ -54,7 +54,7 @@ window.ChangeMode = function (mode) {
 			switchAnnotation(1);
 			APP.changeSurfaceObjectOpacity(-1);
 			APP.removeSkeletons();
-			APP.hideDisks();
+			APP.deleteDisks();
 			break;
 		case "skeleton":
 //			console.log("skeleton")
@@ -65,7 +65,7 @@ window.ChangeMode = function (mode) {
 			switchAnnotation(0);
 			APP.changeSurfaceObjectOpacity(0);
 			APP.addSkeletons();
-			APP.hideDisks();
+			APP.deleteDisks();
 			break;
 		case "sphere":
 //			console.log("shpere")

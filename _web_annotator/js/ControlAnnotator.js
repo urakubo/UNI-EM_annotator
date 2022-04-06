@@ -67,7 +67,7 @@ window.ChangeMode = function (mode) {
 			APP.addSkeletons();
 			APP.deleteDisks();
 			break;
-		case "sphere":
+		case "disk":
 //			console.log("shpere")
 			APP.MarkerMode   = 0;
 			APP.SkeletonMode = 0;

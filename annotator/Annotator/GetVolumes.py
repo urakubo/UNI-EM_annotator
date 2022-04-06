@@ -27,6 +27,22 @@ class GetVolumes:
 			part_mesh_filenames = glob.glob(part_mesh_name_wildcard)
 			if part_mesh_filenames == [] :
 				continue
+			ids_file = [os.path.basename(f).split('-')[-1].split('.')[0] for f in part_mesh_filenames]
+			ids_file = [int(i) for i in ids_file]
+			# print('ids from files: ', ids_file)
+
+			# Select the painted files that are registered in the paint table as a visible object.
+			filename_paint_table = os.path.normpath(os.path.join(self.paint_path, "list.pickle"))
+			with open(filename_paint_table, 'rb') as f:
+				paint_table = pickle.load(f)
+			ids_table = [t['id'] for t in paint_table['list']]
+			# print('ids from paint table: ', ids_table)
+
+			#
+			ids = list(set(ids_file) & set(ids_table))
+			print('Target ids : ', ids)
+			part_mesh_filenames = [os.path.join(self.paint_path, whole_mesh_name_wo_ext+"-"+str(i)+".pickle") for i in ids]
+			# print('part_mesh_filenames : ', part_mesh_filenames)
 
 			# Load surface meshes
 			whole_mesh = trimesh.load( whole_mesh_filename )
@@ -92,6 +108,7 @@ class GetVolumes:
 					else:
 						attributes[id]['min_radius']  = min( [ attributes[id]['min_radius'], min_radius ] )
 
+				#print(text_vtk+'\n')
 				plotter = pv.Plotter()
 				plotter.add_mesh(closed_mesh_for_vtk, label='mesh')
 				plotter.add_text(text_vtk)

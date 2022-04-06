@@ -93,7 +93,7 @@ window.ChangeMode = function (mode) {
       _APP__WEBPACK_IMPORTED_MODULE_0__["APP"].deleteDisks();
       break;
 
-    case "sphere":
+    case "disk":
       //			console.log("shpere")
       _APP__WEBPACK_IMPORTED_MODULE_0__["APP"].MarkerMode = 0;
       _APP__WEBPACK_IMPORTED_MODULE_0__["APP"].SkeletonMode = 0;
@@ -2424,9 +2424,9 @@ const SurfaceTable = new tabulator_tables__WEBPACK_IMPORTED_MODULE_3__("#Surface
     if (columnField == 'act') {
       if (act == true) {
         console.log("Requested ID:", id);
-        _APP__WEBPACK_IMPORTED_MODULE_0__["APP"].addSurfaceObject(id, col);
-        _APP__WEBPACK_IMPORTED_MODULE_0__["APP"].addSkeletonObject(id, col);
-        _APP__WEBPACK_IMPORTED_MODULE_0__["APP"].addDiskObject(id, col);
+        if (!_APP__WEBPACK_IMPORTED_MODULE_0__["APP"].DiskMode) _APP__WEBPACK_IMPORTED_MODULE_0__["APP"].addSurfaceObject(id, col);
+        if (_APP__WEBPACK_IMPORTED_MODULE_0__["APP"].SkeletonMode) _APP__WEBPACK_IMPORTED_MODULE_0__["APP"].addSkeletonObject(id, col);
+        if (_APP__WEBPACK_IMPORTED_MODULE_0__["APP"].DiskMode) _APP__WEBPACK_IMPORTED_MODULE_0__["APP"].addDiskObject(id, col);
       }
 
       if (act == false) {
@@ -2434,7 +2434,7 @@ const SurfaceTable = new tabulator_tables__WEBPACK_IMPORTED_MODULE_3__("#Surface
 
         _APP__WEBPACK_IMPORTED_MODULE_0__["APP"].removeSurfaceObject(id);
         _APP__WEBPACK_IMPORTED_MODULE_0__["APP"].removeSkeletonObject(id);
-        _APP__WEBPACK_IMPORTED_MODULE_0__["APP"].hideDiskObject(id);
+        _APP__WEBPACK_IMPORTED_MODULE_0__["APP"].deleteDiskObject(id);
       }
 
       Object(_HandleBasement__WEBPACK_IMPORTED_MODULE_2__["updateMetricsOnPaintTable"])();

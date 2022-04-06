@@ -53,16 +53,16 @@ export const SurfaceTable = new Tabulator("#SurfaceTable", {
 	  if(columnField == 'act') {
 	  	if(act == true) {
 	  		console.log("Requested ID:", id );
-			APP.addSurfaceObject(id, col);
-			APP.addSkeletonObject(id, col);
-			APP.addDiskObject(id, col);
+			if (!APP.DiskMode) APP.addSurfaceObject(id, col);
+			if (APP.SkeletonMode) APP.addSkeletonObject(id, col);
+			if(APP.DiskMode) APP.addDiskObject(id, col);
 			}
 	  	if(act == false) {
 	  		console.log("Disappear ID:", id )
 			//const filename = sprintf("./stls/i%d.stl", id );
 			APP.removeSurfaceObject(id);
 			APP.removeSkeletonObject(id);
-			APP.hideDiskObject(id);
+			APP.deleteDiskObject(id);
 			}
 			updateMetricsOnPaintTable();
 		}

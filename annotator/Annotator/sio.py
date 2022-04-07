@@ -81,7 +81,7 @@ async def update_paint(sid, data):
 
 @sio.event
 async def update(sid, data):
-  print("update", data)
+  # print("update", data)
   room_id = data["room_id"];
   data["sid"] = sid
   write_file(room_id, data)

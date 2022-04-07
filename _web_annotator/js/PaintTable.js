@@ -126,8 +126,8 @@ export const PaintTable = new Tabulator('#PaintTable', {
 
 
 const updateColor = () => {
-  updateColorOptionsOnAnnotator()
-  paintManager.updateList({ list: PaintTable.getData(), lastPaintId })
+	updateColorOptionsOnAnnotator()
+	paintManager.updateList({ list: PaintTable.getData(), lastPaintId })
 };
 
 window.switchAnnotation = (checked) => {
@@ -137,12 +137,12 @@ window.switchAnnotation = (checked) => {
 
 window.switchEraserAnnotation = (checked) => {
 	APP.paint_on = checked;
-  updateColorOptionsOnAnnotator()
+	updateColorOptionsOnAnnotator()
 };
 
 window.setAnnotationOverwrite = (checked) => {
-  APP.paint_overwriteB = checked;
-  updateColorOptionsOnAnnotator()
+	APP.paint_overwriteB = checked;
+	updateColorOptionsOnAnnotator()
 }
 
 let lastPaintId = 0;

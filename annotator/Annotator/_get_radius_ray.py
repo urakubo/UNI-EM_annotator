@@ -10,7 +10,7 @@ import numpy as np
 
 import ncollpyde
 
-def _get_radius_ray(vertices, tangents, mesh, n_rays=20, aggregate='mean', fallback=0):
+def _get_radius_ray(vertices, tangents, mesh, n_rays=20, aggregate='s_based', fallback=0):
     """Extract radii using ray casting.
     Parameters
     ----------
@@ -31,8 +31,20 @@ def _get_radius_ray(vertices, tangents, mesh, n_rays=20, aggregate='mean', fallb
     radii :     np.ndarray
                 Corresponds to input coords.
     """
+
+    """
+    S = sinΘ /2 * {r1 * r2 + r2 * r3 + r3 * r4 + ... + r10 * r1}
+    r_s = sqrt(S/pi) = sqrt(sinΘ / (2*pi) * {r1 * r2 + r2 * r3 + r3 * r4 + ... + r10 * r1} ) 
+    np.dot( r, np.roll(r, 1) )
+    """
+
+    mult = np.sin( 2 * np.pi / n_rays ) / (2 * np.pi)
+    def s_based(r):
+        r_s = sqrt( mult * np.dot( r, np.roll(r, 1) ) )
+        return r_s
+
     agg_map = {'mean': np.mean, 'max': np.max, 'min': np.min,
-               'median': np.median, 'percentile75': lambda x: np.percentile(x, 75)}
+               'median': np.median, 'percentile75': lambda x: np.percentile(x, 75), 's_based': s_based}
     assert aggregate in agg_map
     agg_func = agg_map[aggregate]
 

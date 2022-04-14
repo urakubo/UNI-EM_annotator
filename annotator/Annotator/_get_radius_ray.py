@@ -40,7 +40,7 @@ def _get_radius_ray(vertices, tangents, mesh, n_rays=20, aggregate='s_based', fa
 
     mult = np.sin( 2 * np.pi / n_rays ) / (2 * np.pi)
     def s_based(r):
-        r_s = sqrt( mult * np.dot( r, np.roll(r, 1) ) )
+        r_s = np.sqrt( mult * np.dot( r, np.roll(r, 1) ) )
         return r_s
 
     agg_map = {'mean': np.mean, 'max': np.max, 'min': np.min,

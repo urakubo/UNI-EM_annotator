@@ -90,15 +90,17 @@ export const PaintTable = new Tabulator('#PaintTable', {
     }},
       {title: "Target", field:"target", width: 73, hozAlign:"center", formatter:"tickCross", headerSort:false, cellClick: (e, cell)=>{
         const table = PaintTable;
+		const page_num = table.getPage();
         const value = cell.getRow().getData();
         table.setData(table.getData("active").map(item => { 
           item = Object.assign({}, item);
           item.debug = true;
           item.target = value.id == item.id;
           item.visibility = item.visibility || item.target;
-          return item;  
+          return item;
         }))
         updateColorOptionsOnAnnotator();
+		table.setPage(page_num);
       }},
 	    {title: "ID", field:"id", width: 40, headerSort:false},
 	    {title: "Name", field: "name", editor: "input", headerSort:false, cellEdited: () => updateColor()},
@@ -130,10 +132,12 @@ const updateColor = () => {
 	paintManager.updateList({ list: PaintTable.getData(), lastPaintId })
 };
 
+/*
 window.switchAnnotation = (checked) => {
 	APP.paint_mode = checked;
 	APP.controls.noRotate = checked;
 }; 
+*/
 
 window.switchEraserAnnotation = (checked) => {
 	APP.paint_on = checked;
@@ -193,7 +197,7 @@ paintManager.emitter.on("update", data => {
     const currentRows = PaintTable.getData() || [];
     const incomingRows = data.list || [];
 
-    console.log(incomingRows);
+    // console.log(incomingRows);
 
     if(syncSequence) { 
       const currentRowsMap = new Map(currentRows.map(currentRow => [currentRow.id, currentRow]));

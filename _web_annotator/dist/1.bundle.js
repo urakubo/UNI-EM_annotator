@@ -50,8 +50,11 @@ window.ChangeMode = function (mode) {
       _APP__WEBPACK_IMPORTED_MODULE_0__["APP"].MarkerMode = 0;
       _APP__WEBPACK_IMPORTED_MODULE_0__["APP"].SkeletonMode = 0;
       _APP__WEBPACK_IMPORTED_MODULE_0__["APP"].DiskMode = 0;
-      _APP__WEBPACK_IMPORTED_MODULE_0__["APP"].cursor.visible = false;
-      switchAnnotation(0);
+      _APP__WEBPACK_IMPORTED_MODULE_0__["APP"].cursor.visible = false; //switchAnnotation(0);
+
+      _APP__WEBPACK_IMPORTED_MODULE_0__["APP"].paint_mode = 0;
+      _APP__WEBPACK_IMPORTED_MODULE_0__["APP"].controls.noRotate = 0; //
+
       _APP__WEBPACK_IMPORTED_MODULE_0__["APP"].changeSurfaceObjectOpacity(-1);
       _APP__WEBPACK_IMPORTED_MODULE_0__["APP"].removeSkeletons();
       _APP__WEBPACK_IMPORTED_MODULE_0__["APP"].deleteDisks();
@@ -62,8 +65,11 @@ window.ChangeMode = function (mode) {
       _APP__WEBPACK_IMPORTED_MODULE_0__["APP"].MarkerMode = 1;
       _APP__WEBPACK_IMPORTED_MODULE_0__["APP"].SkeletonMode = 0;
       _APP__WEBPACK_IMPORTED_MODULE_0__["APP"].DiskMode = 0;
-      _APP__WEBPACK_IMPORTED_MODULE_0__["APP"].cursor.visible = false;
-      switchAnnotation(0);
+      _APP__WEBPACK_IMPORTED_MODULE_0__["APP"].cursor.visible = false; //switchAnnotation(0);
+
+      _APP__WEBPACK_IMPORTED_MODULE_0__["APP"].paint_mode = 0;
+      _APP__WEBPACK_IMPORTED_MODULE_0__["APP"].controls.noRotate = 0; //
+
       _APP__WEBPACK_IMPORTED_MODULE_0__["APP"].changeSurfaceObjectOpacity(-1);
       _APP__WEBPACK_IMPORTED_MODULE_0__["APP"].removeSkeletons();
       _APP__WEBPACK_IMPORTED_MODULE_0__["APP"].deleteDisks();
@@ -74,8 +80,11 @@ window.ChangeMode = function (mode) {
       _APP__WEBPACK_IMPORTED_MODULE_0__["APP"].MarkerMode = 0;
       _APP__WEBPACK_IMPORTED_MODULE_0__["APP"].SkeletonMode = 0;
       _APP__WEBPACK_IMPORTED_MODULE_0__["APP"].DiskMode = 0;
-      _APP__WEBPACK_IMPORTED_MODULE_0__["APP"].cursor.visible = true;
-      switchAnnotation(1);
+      _APP__WEBPACK_IMPORTED_MODULE_0__["APP"].cursor.visible = true; //switchAnnotation(0);
+
+      _APP__WEBPACK_IMPORTED_MODULE_0__["APP"].paint_mode = 1;
+      _APP__WEBPACK_IMPORTED_MODULE_0__["APP"].controls.noRotate = 1; //
+
       _APP__WEBPACK_IMPORTED_MODULE_0__["APP"].changeSurfaceObjectOpacity(-1);
       _APP__WEBPACK_IMPORTED_MODULE_0__["APP"].removeSkeletons();
       _APP__WEBPACK_IMPORTED_MODULE_0__["APP"].deleteDisks();
@@ -86,8 +95,11 @@ window.ChangeMode = function (mode) {
       _APP__WEBPACK_IMPORTED_MODULE_0__["APP"].MarkerMode = 0;
       _APP__WEBPACK_IMPORTED_MODULE_0__["APP"].SkeletonMode = 1;
       _APP__WEBPACK_IMPORTED_MODULE_0__["APP"].DiskMode = 0;
-      _APP__WEBPACK_IMPORTED_MODULE_0__["APP"].cursor.visible = false;
-      switchAnnotation(0);
+      _APP__WEBPACK_IMPORTED_MODULE_0__["APP"].cursor.visible = false; //switchAnnotation(0);
+
+      _APP__WEBPACK_IMPORTED_MODULE_0__["APP"].paint_mode = 0;
+      _APP__WEBPACK_IMPORTED_MODULE_0__["APP"].controls.noRotate = 0; //
+
       _APP__WEBPACK_IMPORTED_MODULE_0__["APP"].changeSurfaceObjectOpacity(0);
       _APP__WEBPACK_IMPORTED_MODULE_0__["APP"].addSkeletons();
       _APP__WEBPACK_IMPORTED_MODULE_0__["APP"].deleteDisks();
@@ -98,8 +110,11 @@ window.ChangeMode = function (mode) {
       _APP__WEBPACK_IMPORTED_MODULE_0__["APP"].MarkerMode = 0;
       _APP__WEBPACK_IMPORTED_MODULE_0__["APP"].SkeletonMode = 0;
       _APP__WEBPACK_IMPORTED_MODULE_0__["APP"].DiskMode = 1;
-      _APP__WEBPACK_IMPORTED_MODULE_0__["APP"].cursor.visible = false;
-      switchAnnotation(0);
+      _APP__WEBPACK_IMPORTED_MODULE_0__["APP"].cursor.visible = false; //switchAnnotation(0);
+
+      _APP__WEBPACK_IMPORTED_MODULE_0__["APP"].paint_mode = 0;
+      _APP__WEBPACK_IMPORTED_MODULE_0__["APP"].controls.noRotate = 0; //
+
       _APP__WEBPACK_IMPORTED_MODULE_0__["APP"].changeSurfaceObjectOpacity(-2);
       _APP__WEBPACK_IMPORTED_MODULE_0__["APP"].addSkeletons();
       _APP__WEBPACK_IMPORTED_MODULE_0__["APP"].showDisks();
@@ -438,7 +453,7 @@ const syncAnnotation = lodash__WEBPACK_IMPORTED_MODULE_2___default.a.debounce(()
 
 _SyncPaint__WEBPACK_IMPORTED_MODULE_3__["paintManager"].emitter.on("update", data => {
   if (data.room_id !== "list") {
-    console.log(data.room_id);
+    //console.log(data.room_id);
     const [surfaceId, colorId] = data.room_id.split("-");
     const mesh = _APP__WEBPACK_IMPORTED_MODULE_0__["APP"].getMeshes().find(mesh => mesh.name === surfaceId);
 
@@ -2001,6 +2016,7 @@ const PaintTable = new tabulator_tables__WEBPACK_IMPORTED_MODULE_3__('#PaintTabl
     headerSort: false,
     cellClick: (e, cell) => {
       const table = PaintTable;
+      const page_num = table.getPage();
       const value = cell.getRow().getData();
       table.setData(table.getData("active").map(item => {
         item = Object.assign({}, item);
@@ -2010,6 +2026,7 @@ const PaintTable = new tabulator_tables__WEBPACK_IMPORTED_MODULE_3__('#PaintTabl
         return item;
       }));
       updateColorOptionsOnAnnotator();
+      table.setPage(page_num);
     }
   }, {
     title: "ID",
@@ -2153,11 +2170,13 @@ const updateColor = () => {
     lastPaintId
   });
 };
+/*
+window.switchAnnotation = (checked) => {
+	APP.paint_mode = checked;
+	APP.controls.noRotate = checked;
+}; 
+*/
 
-window.switchAnnotation = checked => {
-  _APP__WEBPACK_IMPORTED_MODULE_0__["APP"].paint_mode = checked;
-  _APP__WEBPACK_IMPORTED_MODULE_0__["APP"].controls.noRotate = checked;
-};
 
 window.switchEraserAnnotation = checked => {
   _APP__WEBPACK_IMPORTED_MODULE_0__["APP"].paint_on = checked;
@@ -2214,8 +2233,7 @@ const syncSequence = true;
 _SyncPaint__WEBPACK_IMPORTED_MODULE_1__["paintManager"].emitter.on("update", data => {
   if (data.room_id === "list") {
     const currentRows = PaintTable.getData() || [];
-    const incomingRows = data.list || [];
-    console.log(incomingRows);
+    const incomingRows = data.list || []; // console.log(incomingRows);
 
     if (syncSequence) {
       const currentRowsMap = new Map(currentRows.map(currentRow => [currentRow.id, currentRow]));

@@ -50,11 +50,9 @@ window.ChangeMode = function (mode) {
       _APP__WEBPACK_IMPORTED_MODULE_0__["APP"].MarkerMode = 0;
       _APP__WEBPACK_IMPORTED_MODULE_0__["APP"].SkeletonMode = 0;
       _APP__WEBPACK_IMPORTED_MODULE_0__["APP"].DiskMode = 0;
-      _APP__WEBPACK_IMPORTED_MODULE_0__["APP"].cursor.visible = false; //switchAnnotation(0);
-
+      _APP__WEBPACK_IMPORTED_MODULE_0__["APP"].cursor.visible = false;
       _APP__WEBPACK_IMPORTED_MODULE_0__["APP"].paint_mode = 0;
-      _APP__WEBPACK_IMPORTED_MODULE_0__["APP"].controls.noRotate = 0; //
-
+      _APP__WEBPACK_IMPORTED_MODULE_0__["APP"].controls.noRotate = 0;
       _APP__WEBPACK_IMPORTED_MODULE_0__["APP"].changeSurfaceObjectOpacity(-1);
       _APP__WEBPACK_IMPORTED_MODULE_0__["APP"].removeSkeletons();
       _APP__WEBPACK_IMPORTED_MODULE_0__["APP"].deleteDisks();
@@ -65,11 +63,9 @@ window.ChangeMode = function (mode) {
       _APP__WEBPACK_IMPORTED_MODULE_0__["APP"].MarkerMode = 1;
       _APP__WEBPACK_IMPORTED_MODULE_0__["APP"].SkeletonMode = 0;
       _APP__WEBPACK_IMPORTED_MODULE_0__["APP"].DiskMode = 0;
-      _APP__WEBPACK_IMPORTED_MODULE_0__["APP"].cursor.visible = false; //switchAnnotation(0);
-
+      _APP__WEBPACK_IMPORTED_MODULE_0__["APP"].cursor.visible = false;
       _APP__WEBPACK_IMPORTED_MODULE_0__["APP"].paint_mode = 0;
-      _APP__WEBPACK_IMPORTED_MODULE_0__["APP"].controls.noRotate = 0; //
-
+      _APP__WEBPACK_IMPORTED_MODULE_0__["APP"].controls.noRotate = 0;
       _APP__WEBPACK_IMPORTED_MODULE_0__["APP"].changeSurfaceObjectOpacity(-1);
       _APP__WEBPACK_IMPORTED_MODULE_0__["APP"].removeSkeletons();
       _APP__WEBPACK_IMPORTED_MODULE_0__["APP"].deleteDisks();
@@ -80,11 +76,9 @@ window.ChangeMode = function (mode) {
       _APP__WEBPACK_IMPORTED_MODULE_0__["APP"].MarkerMode = 0;
       _APP__WEBPACK_IMPORTED_MODULE_0__["APP"].SkeletonMode = 0;
       _APP__WEBPACK_IMPORTED_MODULE_0__["APP"].DiskMode = 0;
-      _APP__WEBPACK_IMPORTED_MODULE_0__["APP"].cursor.visible = true; //switchAnnotation(0);
-
+      _APP__WEBPACK_IMPORTED_MODULE_0__["APP"].cursor.visible = true;
       _APP__WEBPACK_IMPORTED_MODULE_0__["APP"].paint_mode = 1;
-      _APP__WEBPACK_IMPORTED_MODULE_0__["APP"].controls.noRotate = 1; //
-
+      _APP__WEBPACK_IMPORTED_MODULE_0__["APP"].controls.noRotate = 1;
       _APP__WEBPACK_IMPORTED_MODULE_0__["APP"].changeSurfaceObjectOpacity(-1);
       _APP__WEBPACK_IMPORTED_MODULE_0__["APP"].removeSkeletons();
       _APP__WEBPACK_IMPORTED_MODULE_0__["APP"].deleteDisks();
@@ -95,11 +89,9 @@ window.ChangeMode = function (mode) {
       _APP__WEBPACK_IMPORTED_MODULE_0__["APP"].MarkerMode = 0;
       _APP__WEBPACK_IMPORTED_MODULE_0__["APP"].SkeletonMode = 1;
       _APP__WEBPACK_IMPORTED_MODULE_0__["APP"].DiskMode = 0;
-      _APP__WEBPACK_IMPORTED_MODULE_0__["APP"].cursor.visible = false; //switchAnnotation(0);
-
+      _APP__WEBPACK_IMPORTED_MODULE_0__["APP"].cursor.visible = false;
       _APP__WEBPACK_IMPORTED_MODULE_0__["APP"].paint_mode = 0;
-      _APP__WEBPACK_IMPORTED_MODULE_0__["APP"].controls.noRotate = 0; //
-
+      _APP__WEBPACK_IMPORTED_MODULE_0__["APP"].controls.noRotate = 0;
       _APP__WEBPACK_IMPORTED_MODULE_0__["APP"].changeSurfaceObjectOpacity(0);
       _APP__WEBPACK_IMPORTED_MODULE_0__["APP"].addSkeletons();
       _APP__WEBPACK_IMPORTED_MODULE_0__["APP"].deleteDisks();
@@ -110,11 +102,9 @@ window.ChangeMode = function (mode) {
       _APP__WEBPACK_IMPORTED_MODULE_0__["APP"].MarkerMode = 0;
       _APP__WEBPACK_IMPORTED_MODULE_0__["APP"].SkeletonMode = 0;
       _APP__WEBPACK_IMPORTED_MODULE_0__["APP"].DiskMode = 1;
-      _APP__WEBPACK_IMPORTED_MODULE_0__["APP"].cursor.visible = false; //switchAnnotation(0);
-
+      _APP__WEBPACK_IMPORTED_MODULE_0__["APP"].cursor.visible = false;
       _APP__WEBPACK_IMPORTED_MODULE_0__["APP"].paint_mode = 0;
-      _APP__WEBPACK_IMPORTED_MODULE_0__["APP"].controls.noRotate = 0; //
-
+      _APP__WEBPACK_IMPORTED_MODULE_0__["APP"].controls.noRotate = 0;
       _APP__WEBPACK_IMPORTED_MODULE_0__["APP"].changeSurfaceObjectOpacity(-2);
       _APP__WEBPACK_IMPORTED_MODULE_0__["APP"].addSkeletons();
       _APP__WEBPACK_IMPORTED_MODULE_0__["APP"].showDisks();
@@ -1288,8 +1278,8 @@ _APP__WEBPACK_IMPORTED_MODULE_0__["APP"].addSurfaceObject = function (id, col) {
   if (obj != undefined) {
     // console.log('Obj: ', obj)
     obj.visible = true;
-    obj.material.opacity = _APP__WEBPACK_IMPORTED_MODULE_0__["APP"].surface_opacity;
-    _SyncPaint__WEBPACK_IMPORTED_MODULE_3__["paintManager"].addSurface(name);
+    obj.material.opacity = _APP__WEBPACK_IMPORTED_MODULE_0__["APP"].surface_opacity; // paintManager.addSurface(name);
+
     return true;
   } // Request the surface mesh generation to the server if it does not exist.
 
@@ -1412,12 +1402,10 @@ _APP__WEBPACK_IMPORTED_MODULE_0__["APP"].changeSurfaceObjectOpacity = function (
     var b = rows[i].getData().b;
 
     if (invisible == 1) {
-      _APP__WEBPACK_IMPORTED_MODULE_0__["APP"].removeSurfaceObject(id);
-      _APP__WEBPACK_IMPORTED_MODULE_0__["APP"].removeSkeletonObject(id);
+      _APP__WEBPACK_IMPORTED_MODULE_0__["APP"].removeSurfaceObject(id); //			APP.removeSkeletonObject(id);
     } else {
       var col = r * 256 * 256 + g * 256 + b * 1;
-      _APP__WEBPACK_IMPORTED_MODULE_0__["APP"].addSurfaceObject(id, col);
-      _APP__WEBPACK_IMPORTED_MODULE_0__["APP"].addSkeletonObject(id, col);
+      _APP__WEBPACK_IMPORTED_MODULE_0__["APP"].addSurfaceObject(id, col); //			APP.addSkeletonObject(id, col);
     }
   }
 }; // if (obj instanceof THREE.Mesh === true && /^\d*$/.test(obj.name) && obj.name.length === 10 ) {

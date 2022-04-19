@@ -29,10 +29,8 @@ window.ChangeMode = function (mode) {
 			APP.SkeletonMode = 0;
 			APP.DiskMode   = 0;
 			APP.cursor.visible = false;
-			//switchAnnotation(0);
 			APP.paint_mode = 0;
 			APP.controls.noRotate = 0;
-			//
 			APP.changeSurfaceObjectOpacity(-1);
 			APP.removeSkeletons();
 			APP.deleteDisks();
@@ -43,10 +41,8 @@ window.ChangeMode = function (mode) {
 			APP.SkeletonMode = 0;
 			APP.DiskMode   = 0;
 			APP.cursor.visible = false;
-			//switchAnnotation(0);
 			APP.paint_mode = 0;
 			APP.controls.noRotate = 0;
-			//
 			APP.changeSurfaceObjectOpacity(-1);
 			APP.removeSkeletons();
 			APP.deleteDisks();
@@ -57,10 +53,8 @@ window.ChangeMode = function (mode) {
 			APP.SkeletonMode = 0;
 			APP.DiskMode   = 0;
 			APP.cursor.visible = true;
-			//switchAnnotation(0);
 			APP.paint_mode = 1;
 			APP.controls.noRotate = 1;
-			//
 			APP.changeSurfaceObjectOpacity(-1);
 			APP.removeSkeletons();
 			APP.deleteDisks();
@@ -71,10 +65,8 @@ window.ChangeMode = function (mode) {
 			APP.SkeletonMode = 1;
 			APP.DiskMode   = 0;
 			APP.cursor.visible = false;
-			//switchAnnotation(0);
 			APP.paint_mode = 0;
 			APP.controls.noRotate = 0;
-			//
 			APP.changeSurfaceObjectOpacity(0);
 			APP.addSkeletons();
 			APP.deleteDisks();
@@ -85,14 +77,12 @@ window.ChangeMode = function (mode) {
 			APP.SkeletonMode = 0;
 			APP.DiskMode   = 1;
 			APP.cursor.visible = false;
-			//switchAnnotation(0);
 			APP.paint_mode = 0;
 			APP.controls.noRotate = 0;
-			//
 			APP.changeSurfaceObjectOpacity(-2);
 			APP.addSkeletons();
 			APP.showDisks();
-			break;		
+			break;
 		default:
     		console.log(`Error. Mode ${mode} cannot be interpreted.`);
 		}

@@ -31,7 +31,7 @@ APP.addSurfaceObject = function(id, col) {
 		// console.log('Obj: ', obj)
 		obj.visible = true;
 		obj.material.opacity = APP.surface_opacity;
-		paintManager.addSurface(name);
+		// paintManager.addSurface(name);
 		return true;
 		}
 
@@ -147,11 +147,11 @@ APP.changeSurfaceObjectOpacity = function(opacity) {
   		var b   = rows[i].getData().b;
 		if (invisible == 1) {
 			APP.removeSurfaceObject(id);
-			APP.removeSkeletonObject(id);
+//			APP.removeSkeletonObject(id);
 		} else {
 			var col = r*256*256+g*256+b*1 ;
 			APP.addSurfaceObject(id, col);
-			APP.addSkeletonObject(id, col);
+//			APP.addSkeletonObject(id, col);
 		}
 	}
 }

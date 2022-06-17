@@ -28,7 +28,7 @@ class GenerateSkeleton:
     self.smooth      = smooth
     self.extra_after = extra_after
 
-  def exec( self, id, markerlocs ):
+  def run( self, id, markerlocs ):
 
     # mask = (self.ids_volume == id)
 
@@ -98,7 +98,7 @@ class GenerateSkeleton:
 	##
 	## Smoothing
 	##
-    new_vertices, new_edges, new_lengths, new_tangents = self._smoothing(vertices, edges)
+    new_vertices, new_edges, new_lengths, new_tangents, new_ids_edge = self._smoothing(vertices, edges)
 
     if new_vertices.shape[0] < 4:
     	print('No skeleton: ', id)
@@ -127,7 +127,7 @@ class GenerateSkeleton:
 	##
 	## Save skeleton
 	##
-    skeleton_ids = self._save_skeleton_file(id, new_vertices, new_edges, new_radiuses, new_lengths, new_tangents)
+    skeleton_ids = self._save_skeleton_file(id, new_vertices, new_edges, new_radiuses, new_lengths, new_tangents, new_ids_edge)
 
 
 
@@ -191,9 +191,10 @@ class GenerateSkeleton:
     new_lengths   = []
     new_tangents  = []
     new_edges	  = []
+    new_id_edge   = []
 
 	# Smoothing and mapping of segments
-    for segment in segments:
+    for id, segment in enumerate(segments):
 	
 		## Smoothing
     	if len(segment) < 4:
@@ -233,18 +234,21 @@ class GenerateSkeleton:
     	ids_end_new = len(new_vertices)
     	tmp_edges = [[i, i+1] for i in range(ids_start_new,ids_end_new-1)]
     	new_edges.extend(tmp_edges)
-	
+    	new_id_edge.extend( [id] * len(tmp_edges) )
+
+
     new_vertices      = np.array(new_vertices)
     new_edges		  = np.array(new_edges)
     new_lengths  	  = np.array(new_lengths)
     new_tangents	  = np.array(new_tangents)
+    new_ids_edge      = np.array(new_id_edge)
     print('Vertices: ', new_vertices.shape)
     print('Edges   : ', new_edges.shape)
     print('Lengths : ', new_lengths.shape)
     print('Tangents: ', new_tangents.shape)
     print('Total length : ', np.sum(new_lengths))
 
-    return new_vertices, new_edges, new_lengths, new_tangents
+    return new_vertices, new_edges, new_lengths, new_tangents, new_ids_edge
 
 
   def _load_surface_vertices(self, id):
@@ -263,7 +267,7 @@ class GenerateSkeleton:
     return mesh
 
 
-  def _save_skeleton_file(self, id, vertices, edges, radiuses, lengths, tangents):
+  def _save_skeleton_file(self, id, vertices, edges, radiuses, lengths, tangents, ids_edge):
     filename = self.skeletons_path + os.sep + str(id).zfill(10)+'.hdf5'
     with h5py.File( filename ,'w') as f:
     	f.create_dataset('vertices', data=vertices)
@@ -271,6 +275,7 @@ class GenerateSkeleton:
     	f.create_dataset('radiuses', data=radiuses)
     	f.create_dataset('lengths' , data=lengths)
     	f.create_dataset('tangents', data=tangents)
+    	f.create_dataset('ids_edge', data=ids_edge)
     print('Generated skeleton ID: ', id)
     print('')
     return True

@@ -70,7 +70,7 @@ class SurfaceSkeletonHandler(tornado.web.RequestHandler):
     	extra_after = bool(request['extra_after'])
     	self.gen_skel.set_params(scale, constant, min_voxel, max_path, smooth, extra_after)
     	for elem in request['element']:
-	    	flag = self.gen_skel.exec(elem['id'], elem['markerlocs'])
+	    	flag = self.gen_skel.run(elem['id'], elem['markerlocs'])
 	    	if not flag:
 	    		self.write("False")
     	self.write("True")

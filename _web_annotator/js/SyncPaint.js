@@ -33,7 +33,8 @@ class RoomManager {
     }
   }
   enterRoom(roomId) {
-    this.socket.emit("enter", roomId)  
+    this.socket.emit("enter", roomId);
+    // 20220824 Urakubo
   }
   leaveRoom(roomId) {
     this.socket.emit("leave", roomId);

@@ -142,11 +142,8 @@ class GenerateSkeleton:
     edges_num_connect = collections.Counter(edges_ids)
     edges_cross = [k for k, v in edges_num_connect.items() if v > 2]
 
-    start_pairs = []
-    neighbors_cross = []
 
-	# Obtain the pairs of [crossing edges, neighboring edges]
-
+	# If no crossing edges
     if edges_cross == []:
     	edges_ends = [k for k, v in edges_num_connect.items() if v == 1]
     	partner    = edges[np.any(edges == edges_ends[0], axis=1),1][0]
@@ -155,6 +152,9 @@ class GenerateSkeleton:
 #    	print('segment: ', segment)
     	return self._exec_smoothing(vertices, [segment])
 
+	# Obtain the pairs of [crossing edges, neighboring edges]
+    start_pairs = []
+    neighbors_cross = []
     for id_cross in edges_cross:
     	tmp = edges[np.any(edges == id_cross, axis=1),:].flatten()
     	_neighbors_cross  = tmp[tmp != id_cross]
@@ -210,6 +210,17 @@ class GenerateSkeleton:
     	u_fine = np.linspace(0,1,num_pts)
     	x_fit, y_fit, z_fit = interpolate.splev(u_fine, tck)
     	
+    	## Keep endpoint at the original locations
+    	x0 = np.atleast_1d(x[0])
+    	y0 = np.atleast_1d(y[0])
+    	z0 = np.atleast_1d(z[0])
+    	x_ = np.atleast_1d(x[-1])
+    	y_ = np.atleast_1d(y[-1])
+    	z_ = np.atleast_1d(z[-1])
+    	x_fit = np.concatenate((x0, x_fit[1:-2], x_))
+    	y_fit = np.concatenate((y0, y_fit[1:-2], y_))
+    	z_fit = np.concatenate((z0, z_fit[1:-2], z_))
+
     	## Segmental lengths
     	x_diff = np.diff(x_fit)
     	y_diff = np.diff(y_fit)

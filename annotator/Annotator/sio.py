@@ -7,7 +7,7 @@ import os
 import pprint
 from annotator.Annotator import room
 
-sio = socketio.AsyncServer(async_mode='tornado')
+sio = socketio.AsyncServer(async_mode='tornado', ping_interval=50, ping_travler=60, ping_timeout=300, always_connect=True)
 
 from annotator.Annotator.GetVolumes import GetVolumes
 

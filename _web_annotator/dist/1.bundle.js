@@ -2494,7 +2494,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-const socket = socket_io_client__WEBPACK_IMPORTED_MODULE_4___default()(`${location.origin}/`);
+const socket = socket_io_client__WEBPACK_IMPORTED_MODULE_4___default()(`${location.origin}/`, {
+  reconnectionDelayMax: 10000
+});
 socket.on('system', data => {
   console.log('system', data);
 });
@@ -2527,7 +2529,7 @@ class RoomManager {
   }
 
   enterRoom(roomId) {
-    this.socket.emit("enter", roomId);
+    this.socket.emit("enter", roomId); // 20220824 Urakubo
   }
 
   leaveRoom(roomId) {

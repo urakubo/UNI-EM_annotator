@@ -316,8 +316,8 @@ class GenerateSkeleton:
     teasar_params={\
 		'scale': self.scale,
 		'const': self.constant, # physical units default 500
-		'pdrf_exponent': 4,
-		'pdrf_scale': 100000,
+		'pdrf_exponent': 4*3, # Default 4
+		'pdrf_scale': 100000, # Default 100000
 		'soma_detection_threshold': 1100, # physical units
 		'soma_acceptance_threshold': 3500, # physical units
 		'soma_invalidation_scale': 1.0,

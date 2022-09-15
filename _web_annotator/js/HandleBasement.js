@@ -287,7 +287,7 @@ export function launchAnnotator() {
 
 	// Surface opacity
 	APP.surface_opacity          = 1.0;
-	APP.surface_opacity_reserved = 0.5;
+	APP.surface_opacity_reserved = 0.1;
 
 	// Skeleton
 	APP.SkeletonMode = 0;

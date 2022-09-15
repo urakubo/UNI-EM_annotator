@@ -570,7 +570,7 @@ function launchAnnotator() {
   _APP__WEBPACK_IMPORTED_MODULE_0__["APP"].MarkerID = 1; // Surface opacity
 
   _APP__WEBPACK_IMPORTED_MODULE_0__["APP"].surface_opacity = 1.0;
-  _APP__WEBPACK_IMPORTED_MODULE_0__["APP"].surface_opacity_reserved = 0.5; // Skeleton
+  _APP__WEBPACK_IMPORTED_MODULE_0__["APP"].surface_opacity_reserved = 0.1; // Skeleton
 
   _APP__WEBPACK_IMPORTED_MODULE_0__["APP"].SkeletonMode = 0; // Sphere
 
@@ -2494,9 +2494,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-const socket = socket_io_client__WEBPACK_IMPORTED_MODULE_4___default()(`${location.origin}/`, {
-  reconnectionDelayMax: 10000
-});
+const socket = socket_io_client__WEBPACK_IMPORTED_MODULE_4___default()(`${location.origin}/`);
 socket.on('system', data => {
   console.log('system', data);
 });

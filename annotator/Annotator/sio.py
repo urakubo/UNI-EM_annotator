@@ -38,7 +38,7 @@ async def update_paint_volumes(sid):
   skeleton_path= u_info.skeletons_whole_path
   paint_path   = u_info.paint_path
   get_volumes  = GetVolumes(surface_path, paint_path, skeleton_path)
-  attributes   = get_volumes.exec()
+  attributes   = get_volumes.run()
 
   pprint.pprint(attributes, indent=2)
 

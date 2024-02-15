@@ -17,7 +17,7 @@ class GetVolumes:
 		self.paint_path    = paint_path
 		self.skeleton_path = skeleton_path
 
-	def exec(self):
+	def run(self):
 		attributes  = {}
 		for whole_mesh_filename in glob.glob(os.path.join(self.surface_path, "*.stl")) :
 
@@ -58,11 +58,12 @@ class GetVolumes:
 					skel['radiuses'] = f['radiuses'][()]
 					if 'lengths' in f.keys() :
 						skel['lengths']  = f['lengths'][()]
-
+				print('skeleton file loaded.')
 			for part_mesh_filename in part_mesh_filenames :
 				with open(part_mesh_filename, 'rb') as file:
 					data = pickle.load(file)
 
+				print('Get _get_volume.')
 				closed_mesh, closed_mesh_for_vtk, area = self._get_volume(surf_vertices, surf_faces, data['painted'])
 				if closed_mesh.volume is None :
 					continue
@@ -90,12 +91,13 @@ class GetVolumes:
 
 				# If skeleton exists:
 				if skel != {}:
+					print('Skeleton file extsts')
 					len_enclosed, len_tot, min_radius, max_radius, mean_radius = self._get_radius_length(closed_mesh, skel)
-					# print('Total length (um)   : ', len_tot )
-					# print('Enclosed length (um): ', len_enclosed )
-					# print('Minimum radius (um) : ', min_radius )
-					# print('Maximum radius (um) : ', max_radius )
-					# print('Mean radius (um)    : ', mean_radius )
+					print('Total length (um)   : ', len_tot )
+					print('Enclosed length (um): ', len_enclosed )
+					print('Minimum radius (um) : ', min_radius )
+					print('Maximum radius (um) : ', max_radius )
+					print('Mean radius (um)    : ', mean_radius )
 					text_vtk2 = "Length (um) : {0:.4f}\nMin r (um) : {1:.4f}\nMax r (um) : {2:.4f}\nMean r (um) : {3:.4f}".format(len_enclosed, min_radius, max_radius, mean_radius)
 					text_vtk = text_vtk + text_vtk2
 
@@ -135,8 +137,8 @@ class GetVolumes:
 
 		mesh = trimesh.Trimesh(v, np.array(sub_face_id))
 		mesh.merge_vertices()
-		mesh.remove_degenerate_faces()
-		mesh.remove_duplicate_faces()
+		#mesh.remove_degenerate_faces()
+		#mesh.remove_duplicate_faces()
 		vclean = mesh.vertices
 		fclean = mesh.faces
 
@@ -160,13 +162,18 @@ class GetVolumes:
 		closed_faces    = np.array( closed_mesh.faces )
 		num = closed_faces.shape[0]
 		closed_faces = np.hstack([np.ones([num,1]).astype(int)*3,closed_faces])
+
+		#print('get_radius_length: prep finished.')
 		closed_mesh_pv  = pv.PolyData(np.array(closed_vertices), np.array(closed_faces))
+		#print('get_radius_length: pv.PolyData done.')
 
 		ugrid = pv.UnstructuredGrid()
 		ugrid.points = skel['vertices']
+		print('get_radius_length: pv.UnstructuredGrid defined.')
 
 		selection = ugrid.select_enclosed_points(closed_mesh_pv, tolerance=0.0, check_surface=False)
 		mask = selection.point_arrays['SelectedPoints'].view(np.bool)
+		print('get_radius_length: pv.UnstructuredGrid select_enclosed_points done.')
 
 		len_tot       = np.sum(skel['lengths'][:])
 

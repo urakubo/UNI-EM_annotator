@@ -128,9 +128,7 @@ class GenerateSkeleton:
 	## Save skeleton
 	##
     skeleton_ids = self._save_skeleton_file(id, new_vertices, new_edges, new_radiuses, new_lengths, new_tangents, new_ids_edge)
-
-
-
+	
 	##
 	## Smoothing
 	##
@@ -316,7 +314,7 @@ class GenerateSkeleton:
     teasar_params={\
 		'scale': self.scale,
 		'const': self.constant, # physical units default 500
-		'pdrf_exponent': 4*3, # Default 4
+		'pdrf_exponent': 4*4, ############################# Default 4 => 4 * 3
 		'pdrf_scale': 100000, # Default 100000
 		'soma_detection_threshold': 1100, # physical units
 		'soma_acceptance_threshold': 3500, # physical units
